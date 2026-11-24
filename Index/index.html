@@ -1,0 +1,929 @@
+html
+<!DOCTYPE html>
+<html lang="pt-br" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Hiapo Rodrigues | Recreador, Animador e Promotor de Eventos</title>
+    
+    <!-- Google Fon
+     ts: Poppins (Títulos) e Inter (Textos) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Ícones FontAwesome para visual vibrante -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        coral: '#ff4757',
+                        solar: '#ffa502',
+                        electric: '#5f27cd',
+                        cyanpop: '#00d2d3',
+                        surface: '#f8f9fa',
+                    },
+                    animation: {
+                        'gradient-xy': 'gradient-xy 12s ease infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'float-delayed': 'float 8s ease-in-out 2s infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        'gradient-xy': {
+                            '0%, 100%': {
+                                'background-size': '400% 400%',
+                                'background-position': 'left center'
+                            },
+                            '50%': {
+                                'background-size': '200% 200%',
+                                'background-position': 'right center'
+                            }
+                        },
+                        'float': {
+                            '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
+                            '50%': { transform: 'translateY(-20px) rotate(6deg)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Estilos customizados para degradês, vidro e micro-interações */
+        .hero-gradient {
+            background: linear-gradient(-45deg, #ff4757, #ffa502, #5f27cd, #00d2d3);
+            background-size: 400% 400%;
+            animation: gradient-xy 12s ease infinite;
+        }
+
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, #ff4757 0%, #5f27cd 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Animação de entrada ao rolar a página */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.7s cubic-bezier(0.5, 0, 0, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Efeito de brilho nos cards */
+        .card-hover {
+            transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 30px -10px rgba(95, 39, 205, 0.18);
+        }
+
+        /* Botão pulsante do WhatsApp */
+        @keyframes pulse-ring {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+        .whatsapp-pulse {
+            animation: pulse-ring 2s infinite;
+        }
+    </style>
+</head>
+<body class="bg-[#f8f9fa] text-slate-700 font-sans antialiased selection:bg-[#ff4757] selection:text-white overflow-x-hidden">
+
+    <!-- ==================== NAVEGAÇÃO FLUTUANTE ==================== -->
+    <nav class="fixed top-0 left-0 right-0 z-40 glass-nav shadow-sm transition-all duration-300">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16 sm:h-20">
+                <!-- Logo / Nome -->
+                <a href="#inicio" class="font-display font-black text-xl sm:text-2xl tracking-tight text-slate-900 flex items-center gap-2">
+                    <span class="w-9 h-9 rounded-xl bg-gradient-to-tr from-[#ff4757] to-[#ffa502] text-white flex items-center justify-center shadow-md transform -rotate-6">
+                        <i class="fa-solid fa-star text-sm"></i>
+                    </span>
+                    <span>Hiapo<span class="text-[#ff4757]">.</span></span>
+                </a>
+
+                <!-- Links Desktop -->
+                <div class="hidden md:flex items-center space-x-8 font-medium text-sm text-slate-600">
+                    <a href="#sobre" class="hover:text-[#ff4757] transition-colors">Sobre Mim</a>
+                    <a href="#experiencias" class="hover:text-[#5f27cd] transition-colors">Experiências</a>
+                    <a href="#galeria" class="hover:text-[#00d2d3] transition-colors">Fotos & Vídeos</a>
+                    <a href="#habilidades" class="hover:text-[#ffa502] transition-colors">Habilidades</a>
+                </div>
+
+                <!-- Botão CTA Nav -->
+                <div class="flex items-center gap-3">
+                    <a href="#contato" class="bg-slate-900 hover:bg-[#5f27cd] text-white font-display font-bold text-xs sm:text-sm px-4 py-2.5 sm:px-5 sm:py-3 rounded-full shadow-md transition-all transform hover:scale-105">
+                        Contratar Agora
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ==================== HERO SECTION (HEADER) ==================== -->
+    <header id="inicio" class="relative pt-28 pb-20 sm:pt-36 sm:pb-28 hero-gradient text-white overflow-hidden">
+        <!-- Formas geométricas flutuantes decorativas -->
+        <div class="absolute inset-0 overflow-hidden pointer-events-none">
+            <div class="absolute top-20 left-10 w-24 h-24 rounded-full bg-white/15 blur-sm animate-float"></div>
+            <div class="absolute bottom-16 right-12 w-36 h-36 rounded-3xl bg-[#ffa502]/25 rotate-12 animate-float-delayed"></div>
+            <div class="absolute top-1/3 right-1/4 w-12 h-12 rounded-xl border-4 border-white/25 rotate-45 animate-float"></div>
+            <div class="absolute bottom-24 left-1/4 w-16 h-16 rounded-full border-4 border-[#00d2d3]/40 animate-pulse-slow"></div>
+        </div>
+
+        <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row items-center gap-10 lg:gap-14">
+                
+                <!-- Coluna da Foto de Perfil -->
+                <div class="relative group flex-shrink-0">
+                    <!-- Halo colorido animado atrás da foto -->
+                    <div class="absolute -inset-2 bg-gradient-to-r from-[#ffa502] via-[#00d2d3] to-[#ff4757] rounded-full blur-md opacity-80 group-hover:opacity-100 transition duration-500"></div>
+                    
+                    <div class="relative w-48 h-48 sm:w-60 sm:h-60 rounded-full p-2 bg-white/25 backdrop-blur-md shadow-2xl">
+                        <!-- =========================================================================
+                             INSTRUÇÃO PARA TROCAR A FOTO DE PERFIL:
+                             Substitua o link dentro de src="..." pelo link da sua foto real 
+                             (ou o nome do arquivo local, ex: "foto-hiapo.jpg").
+                             ========================================================================= -->
+                        <img 
+                            src="IMG-20250920-WA0001.jpg" 
+                            onerror="this.src='https://placehold.co/500x500/ff4757/ffffff?text=Hiapo+Nunes'"
+                            alt="Foto de perfil de Hiapo Nunes Rodrigues" 
+                            class="w-full h-full object-cover rounded-full border-4 border-white shadow-inner"
+                        >
+                        <!-- Selo flutuante -->
+                        <div class="absolute -bottom-2 -right-2 bg-white text-slate-900 font-display font-bold text-xs px-3.5 py-1.5 rounded-full shadow-lg flex items-center gap-1.5">
+                            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping"></span>
+                            Disponível para Eventos
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Coluna de Texto Principal -->
+                <div class="text-center lg:text-left flex-1">
+                    <div class="inline-flex items-center gap-2 bg-white/20 backdrop-blur-md px-4 py-1.5 rounded-full text-xs sm:text-sm font-semibold tracking-wide uppercase mb-5 shadow-sm">
+                        <i class="fa-solid fa-bolt text-[#ffa502]"></i>
+                        <span>Entretenimento & Marketing de Ativação</span>
+                    </div>
+
+                    <h1 class="font-display font-black text-4xl sm:text-5xl lg:text-6xl leading-tight tracking-tight mb-4 drop-shadow-sm">
+                        Hiapo Rodrigues
+                    </h1>
+                    
+                    <p class="font-display font-bold text-xl sm:text-2xl text-white/95 mb-8">
+                        Recreador, Animador e Promotor de Eventos
+                    </p>
+
+                    <!-- Botões de Ação (CTAs) -->
+                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+                        <a href="https://wa.me/5511998561906?text=Ol%C3%A1%20Hiapo!%20Vi%20seu%20portf%C3%B3lio%20e%20gostaria%20de%20conversar%20sobre%20um%20evento." 
+                           target="_blank" 
+                           rel="noopener noreferrer"
+                           class="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-[#25D366] hover:bg-[#20bd5a] text-white font-display font-bold text-base px-7 py-4 rounded-2xl shadow-xl transition-all transform hover:-translate-y-1">
+                            <i class="fa-brands fa-whatsapp text-2xl"></i>
+                            <span>Chamar no WhatsApp</span>
+                        </a>
+
+                        <a href="#galeria" 
+                           class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white text-slate-900 hover:bg-slate-100 font-display font-bold text-base px-7 py-4 rounded-2xl shadow-xl transition-all transform hover:-translate-y-1">
+                            <i class="fa-solid fa-play-circle text-[#ff4757] text-xl"></i>
+                            <span>Ver Fotos & Vídeos</span>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Onda decorativa na base do Hero -->
+        <div class="absolute bottom-0 left-0 right-0 leading-none overflow-hidden">
+            <svg class="relative block w-full h-8 sm:h-14" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V95.8C59.71,118.08,130.83,119.3,192.39,105.7,236.5,95.95,278.43,64.4,321.39,56.44Z" fill="#f8f9fa"></path>
+            </svg>
+        </div>
+    </header>
+
+    <!-- ==================== CONTEÚDO PRINCIPAL ==================== -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-24">
+
+        <!-- 1. SEÇÃO SOBRE MIM -->
+        <section id="sobre" class="reveal scroll-mt-24">
+            <div class="bg-white rounded-3xl p-8 sm:p-12 shadow-xl shadow-slate-200/60 border border-slate-100 relative overflow-hidden">
+                <!-- Detalhe colorido no canto -->
+                <div class="absolute top-0 right-0 w-40 h-40 bg-gradient-to-bl from-[#00d2d3]/15 to-transparent rounded-bl-full pointer-events-none"></div>
+
+                <div class="max-w-3xl">
+                    <span class="inline-block text-xs font-display font-extrabold uppercase tracking-wider text-[#ff4757] bg-[#ff4757]/10 px-3.5 py-1.5 rounded-full mb-3">
+                        Quem sou eu
+                    </span>
+                    <h2 class="font-display font-extrabold text-3xl sm:text-4xl text-slate-900 mb-6">
+                        Sobre Mim
+                    </h2>
+                    
+                    <!-- TEXTO ORIGINAL MANTIDO EXATAMENTE -->
+                    <p class="text-lg sm:text-xl text-slate-600 leading-relaxed mb-8">
+                        Aprendendo e evoluindo a cada trabalho/evento, sempre buscando networking no mundo louco de eventos.
+                        Com versatilidade e sólida experiência em animação de eventos, hospitalidade e atendimento ao público.
+                    </p>
+                </div>
+
+                <!-- Badges Interativos de Diferenciais -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 pt-4 border-t border-slate-100">
+                    <div class="group flex items-center gap-3 p-3.5 rounded-2xl bg-[#ff4757]/5 hover:bg-[#ff4757] transition-all duration-300 cursor-default">
+                        <div class="w-10 h-10 rounded-xl bg-[#ff4757] text-white group-hover:bg-white group-hover:text-[#ff4757] flex items-center justify-center shadow-sm transition-colors">
+                            <i class="fa-solid fa-fire-flame-curved"></i>
+                        </div>
+                        <span class="font-display font-bold text-sm sm:text-base text-slate-800 group-hover:text-white transition-colors">Energia</span>
+                    </div>
+
+                    <div class="group flex items-center gap-3 p-3.5 rounded-2xl bg-[#5f27cd]/5 hover:bg-[#5f27cd] transition-all duration-300 cursor-default">
+                        <div class="w-10 h-10 rounded-xl bg-[#5f27cd] text-white group-hover:bg-white group-hover:text-[#5f27cd] flex items-center justify-center shadow-sm transition-colors">
+                            <i class="fa-solid fa-shield-halved"></i>
+                        </div>
+                        <span class="font-display font-bold text-sm sm:text-base text-slate-800 group-hover:text-white transition-colors">Segurança</span>
+                    </div>
+
+                    <div class="group flex items-center gap-3 p-3.5 rounded-2xl bg-[#ffa502]/10 hover:bg-[#ffa502] transition-all duration-300 cursor-default">
+                        <div class="w-10 h-10 rounded-xl bg-[#ffa502] text-white group-hover:bg-white group-hover:text-[#ffa502] flex items-center justify-center shadow-sm transition-colors">
+                            <i class="fa-solid fa-bullhorn"></i>
+                        </div>
+                        <span class="font-display font-bold text-sm sm:text-base text-slate-800 group-hover:text-white transition-colors">Marketing de Ativação</span>
+                    </div>
+
+                    <div class="group flex items-center gap-3 p-3.5 rounded-2xl bg-[#00d2d3]/10 hover:bg-[#00d2d3] transition-all duration-300 cursor-default">
+                        <div class="w-10 h-10 rounded-xl bg-[#00d2d3] text-white group-hover:bg-white group-hover:text-[#00d2d3] flex items-center justify-center shadow-sm transition-colors">
+                            <i class="fa-solid fa-handshake-angle"></i>
+                        </div>
+                        <span class="font-display font-bold text-sm sm:text-base text-slate-800 group-hover:text-white transition-colors">Hospitalidade</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. SEÇÃO EXPERIÊNCIAS PRINCIPAIS -->
+        <section id="experiencias" class="reveal scroll-mt-24">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+                <div>
+                    <span class="inline-block text-xs font-display font-extrabold uppercase tracking-wider text-[#5f27cd] bg-[#5f27cd]/10 px-3.5 py-1.5 rounded-full mb-3">
+                        Trajetória & Atuações
+                    </span>
+                    <h2 class="font-display font-extrabold text-3xl sm:text-4xl text-slate-900">
+                        Experiências Principais
+                    </h2>
+                </div>
+
+                <!-- Botão para abrir Modal de Grandes Eventos -->
+                <button onclick="openEventsModal()" class="self-start md:self-auto inline-flex items-center gap-2 bg-gradient-to-r from-[#5f27cd] to-[#ff4757] text-white font-display font-bold text-sm px-5 py-3 rounded-2xl shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5">
+                    <i class="fa-solid fa-ticket"></i>
+                    <span>Destaques em Grandes Eventos</span>
+                </button>
+            </div>
+
+            <!-- Grid de Cards Interativos (Textos Originais Mantidos) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                
+                <!-- Card 1: Mascotes -->
+                <div class="card-hover bg-white rounded-3xl p-7 sm:p-8 border border-slate-100 shadow-lg shadow-slate-200/50 relative overflow-hidden group">
+                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#ff4757] to-[#ffa502] text-white flex items-center justify-center text-2xl shadow-md mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-masks-theater"></i>
+                    </div>
+                    <h3 class="font-display font-extrabold text-xl text-slate-900 mb-3">
+                        Atuação com Mascotes
+                    </h3>
+                    <p class="text-slate-600 leading-relaxed mb-4">
+                        Personificação de marcas icônicas como Giraffas, Bob's (Shakinho), Zamp (Starbucks e Popeyes) Keeta e Sadia (Lek Trek) em grandes eventos e feiras.
+                    </p>
+                    <div class="flex flex-wrap gap-2 pt-2">
+                        <span class="text-xs font-bold px-2.5 py-1 rounded-lg bg-amber-100 text-amber-800">Giraffas</span>
+                        <span class="text-xs font-bold px-2.5 py-1 rounded-lg bg-red-100 text-red-800">Bob's</span>
+                        <span class="text-xs font-bold px-2.5 py-1 rounded-lg bg-yellow-100 text-yellow-800">Keeta</span>
+                        <span class="text-xs font-bold px-2.5 py-1 rounded-lg bg-rose-100 text-rose-800">Sadia</span>
+                        <span class="text-xs font-bold px-2.5 py-1 rounded-lg bg-amber-100 text-amber-800">Zamp</span>
+                    </div>
+                </div>
+
+                <!-- Card 2: Coordenação e Segurança -->
+                <div class="card-hover bg-white rounded-3xl p-7 sm:p-8 border border-slate-100 shadow-lg shadow-slate-200/50 relative overflow-hidden group">
+                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#5f27cd] to-[#00d2d3] text-white flex items-center justify-center text-2xl shadow-md mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-user-shield"></i>
+                    </div>
+                    <h3 class="font-display font-extrabold text-xl text-slate-900 mb-3">
+                        Coordenação e Segurança
+                    </h3>
+                    <p class="text-slate-600 leading-relaxed mb-4">
+                        Suporte operacional e acompanhamento de formandos em eventos de grande porte.
+                    </p>
+                    <button onclick="openEventsModal()" class="text-sm font-display font-bold text-[#5f27cd] hover:text-[#ff4757] inline-flex items-center gap-1.5 transition-colors">
+                        <span>Ver eventos de grande porte</span>
+                        <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </button>
+                </div>
+
+                <!-- Card 3: Recreação Infantil -->
+                <div class="card-hover bg-white rounded-3xl p-7 sm:p-8 border border-slate-100 shadow-lg shadow-slate-200/50 relative overflow-hidden group">
+                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#ffa502] to-[#ff4757] text-white flex items-center justify-center text-2xl shadow-md mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-shapes"></i>
+                    </div>
+                    <h3 class="font-display font-extrabold text-xl text-slate-900 mb-3">
+                        Recreação Infantil
+                    </h3>
+                    <p class="text-slate-600 leading-relaxed">
+                        Monitoria, recreação e atendimento em buffets infantis, garantindo a diversão com segurança.
+                    </p>
+                </div>
+
+                <!-- Card 4: Alimentos e Bebidas -->
+                <div class="card-hover bg-white rounded-3xl p-7 sm:p-8 border border-slate-100 shadow-lg shadow-slate-200/50 relative overflow-hidden group">
+                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#00d2d3] to-[#5f27cd] text-white flex items-center justify-center text-2xl shadow-md mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-utensils"></i>
+                    </div>
+                    <h3 class="font-display font-extrabold text-xl text-slate-900 mb-3">
+                        Alimentos e Bebidas
+                    </h3>
+                    <p class="text-slate-600 leading-relaxed">
+                        Experiência como Garçom, Barman / Barback e Atendente em operações dinâmicas de alimentação.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 3. SEÇÃO GALERIA DE FOTOS & VÍDEOS -->
+        <section id="galeria" class="reveal scroll-mt-24">
+            <div class="text-center max-w-2xl mx-auto mb-10">
+                <span class="inline-block text-xs font-display font-extrabold uppercase tracking-wider text-[#00a8a9] bg-[#00d2d3]/15 px-3.5 py-1.5 rounded-full mb-3">
+                    Em Ação
+                </span>
+                <h2 class="font-display font-extrabold text-3xl sm:text-4xl text-slate-900 mb-3">
+                    Galeria de Fotos & Vídeos
+                </h2>
+                <p class="text-slate-600">
+                    Confira registros de ativações de marca, personagens, recreação e energia nos eventos. Clique para ampliar.
+                </p>
+            </div>
+
+            <!-- Filtros / Abas Interativas -->
+            <div class="flex flex-wrap justify-center gap-2.5 sm:gap-3 mb-10" id="gallery-filters">
+                <button data-filter="all" class="filter-btn active px-5 py-2.5 rounded-full font-display font-bold text-sm bg-slate-900 text-white shadow-md transition-all">
+                    Todos
+                </button>
+                <button data-filter="mascotes" class="filter-btn px-5 py-2.5 rounded-full font-display font-bold text-sm bg-white text-slate-600 hover:bg-[#ff4757] hover:text-white shadow-sm transition-all">
+                    Mascotes & Ativações
+                </button>
+                <button data-filter="recreacao" class="filter-btn px-5 py-2.5 rounded-full font-display font-bold text-sm bg-white text-slate-600 hover:bg-[#ffa502] hover:text-white shadow-sm transition-all">
+                    Recreação & Eventos
+                </button>
+                <button data-filter="videos" class="filter-btn px-5 py-2.5 rounded-full font-display font-bold text-sm bg-white text-slate-600 hover:bg-[#5f27cd] hover:text-white shadow-sm transition-all">
+                    <i class="fa-solid fa-video mr-1.5"></i>Vídeos
+                </button>
+            </div>
+
+            <!-- =========================================================================
+                 GRID DA GALERIA (COMO ADICIONAR SUAS FOTOS E VÍDEOS REAIS):
+                 1. Para FOTOS: Troque o link em `data-src="..."` e `src="..."` pelo link da sua foto.
+                 2. Para VÍDEOS DO YOUTUBE: Use o formato de embed: 
+                    https://www.youtube.com/embed/CODIGO_DO_VIDEO
+                    e coloque `data-type="youtube"` no card.
+                 3. Para VÍDEOS MP4 LOCAIS: Coloque o caminho do arquivo (ex: "video1.mp4") em 
+                    `data-src="video1.mp4"` e coloque `data-type="mp4"` no card.
+                 ========================================================================= -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="gallery-grid">
+                
+                <!-- ITEM 1: FOTO MASCOTE -->
+                <div class="gallery-item group relative rounded-3xl overflow-hidden bg-white shadow-md cursor-pointer aspect-[4/3]" 
+                     data-category="mascotes"
+                     data-type="image"
+                     data-title="Shakinho (Bob's)"
+                     data-src="IMG-20250907-WA0047.jpg"
+                     onclick="openLightbox(this)">
+                    <img src="IMG-20250907-WA0047.jpg" 
+                         alt="Atuação com Mascotes" 
+                         class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent opacity-80 group-hover:opacity-95 transition-opacity flex flex-col justify-end p-6">
+                        <span class="text-xs font-bold uppercase tracking-wider text-[#ffa502] mb-1">Mascotes & Ativações</span>
+                        <h3 class="font-display font-bold text-white text-lg">Personificação de Marcas</h3>
+                    </div>
+                    <div class="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/90 text-slate-900 flex items-center justify-center opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all shadow-lg">
+                        <i class="fa-solid fa-expand"></i>
+                    </div>
+                </div>
+
+                <!-- ITEM 2: VÍDEO DE ANIMAÇÃO / EVENTO -->
+                <div class="gallery-item group relative rounded-3xl overflow-hidden bg-white shadow-md cursor-pointer aspect-[4/3]" 
+                     data-category="videos mascotes"
+                     data-type="youtube"
+                     data-title="Vídeo: Energia e Interação com o Público"
+                     data-src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+                     onclick="openLightbox(this)">
+                    <!-- Capa (Thumbnail) do vídeo -->
+                    <img src="https://placehold.co/800x600/5f27cd/ffffff?text=Capa+do+Video+1+(Clique+para+Assistir)" 
+                         alt="Vídeo de Animação" 
+                         class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-slate-900/40 group-hover:bg-slate-900/50 transition-colors flex items-center justify-center">
+                        <div class="w-16 h-16 rounded-full bg-[#ff4757] text-white flex items-center justify-center text-2xl shadow-2xl group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-play ml-1"></i>
+                        </div>
+                    </div>
+                    <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-900/90 to-transparent p-6">
+                        <span class="text-xs font-bold uppercase tracking-wider text-[#00d2d3] mb-1">Vídeo em Ação</span>
+                        <h3 class="font-display font-bold text-white text-lg">Animação & Público</h3>
+                    </div>
+                </div>
+
+                <!-- ITEM 3: FOTO RECREAÇÃO INFANTIL -->
+                <div class="gallery-item group relative rounded-3xl overflow-hidden bg-white shadow-md cursor-pointer aspect-[4/3]" 
+                     data-category="recreacao"
+                     data-type="image"
+                     data-title="Recreação Infantil e Buffets"
+                     data-src="https://placehold.co/800x600/ffa502/ffffff?text=Foto+Recreacao+Infantil+(Substitua+o+Link)"
+                     onclick="openLightbox(this)">
+                    <img src="https://placehold.co/800x600/ffa502/ffffff?text=Foto+Recreacao+Infantil+(Substitua+o+Link)" 
+                         alt="Recreação Infantil" 
+                         class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent opacity-80 group-hover:opacity-95 transition-opacity flex flex-col justify-end p-6">
+                        <span class="text-xs font-bold uppercase tracking-wider text-[#00d2d3] mb-1">Recreação & Eventos</span>
+                        <h3 class="font-display font-bold text-white text-lg">Diversão com Segurança</h3>
+                    </div>
+                    <div class="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/90 text-slate-900 flex items-center justify-center opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all shadow-lg">
+                        <i class="fa-solid fa-expand"></i>
+                    </div>
+                </div>
+
+                <!-- ITEM 4: FOTO GRANDES EVENTOS / FORMATURAS -->
+                <div class="gallery-item group relative rounded-3xl overflow-hidden bg-white shadow-md cursor-pointer aspect-[4/3]" 
+                     data-category="recreacao"
+                     data-type="image"
+                     data-title="Coordenação e Suporte em Formaturas e Festivais"
+                     data-src="https://placehold.co/800x600/00d2d3/ffffff?text=Foto+Grandes+Eventos+(Substitua+o+Link)"
+                     onclick="openLightbox(this)">
+                    <img src="https://placehold.co/800x600/00d2d3/ffffff?text=Foto+Grandes+Eventos+(Substitua+o+Link)" 
+                         alt="Coordenação de Eventos" 
+                         class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent opacity-80 group-hover:opacity-95 transition-opacity flex flex-col justify-end p-6">
+                        <span class="text-xs font-bold uppercase tracking-wider text-[#ffa502] mb-1">Recreação & Eventos</span>
+                        <h3 class="font-display font-bold text-white text-lg">Formaturas & Festivais</h3>
+                    </div>
+                    <div class="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/90 text-slate-900 flex items-center justify-center opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all shadow-lg">
+                        <i class="fa-solid fa-expand"></i>
+                    </div>
+                </div>
+
+                <!-- ITEM 5: FOTO ATIVAÇÃO DE MARCA -->
+                <div class="gallery-item group relative rounded-3xl overflow-hidden bg-white shadow-md cursor-pointer aspect-[4/3]" 
+                     data-category="mascotes"
+                     data-type="image"
+                     data-title="Marketing Promocional e Ações de PDV"
+                     data-src="https://placehold.co/800x600/ff6b81/ffffff?text=Foto+Ativacao+Marca+2+(Substitua+o+Link)"
+                     onclick="openLightbox(this)">
+                    <img src="https://placehold.co/800x600/ff6b81/ffffff?text=Foto+Ativacao+Marca+2+(Substitua+o+Link)" 
+                         alt="Ativação de Marca" 
+                         class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent opacity-80 group-hover:opacity-95 transition-opacity flex flex-col justify-end p-6">
+                        <span class="text-xs font-bold uppercase tracking-wider text-[#ffa502] mb-1">Mascotes & Ativações</span>
+                        <h3 class="font-display font-bold text-white text-lg">Engajamento de Marca</h3>
+                    </div>
+                    <div class="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/90 text-slate-900 flex items-center justify-center opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all shadow-lg">
+                        <i class="fa-solid fa-expand"></i>
+                    </div>
+                </div>
+
+                <!-- ITEM 6: VÍDEO RECREAÇÃO / BASTIDORES -->
+                <div class="gallery-item group relative rounded-3xl overflow-hidden bg-white shadow-md cursor-pointer aspect-[4/3]" 
+                     data-category="videos recreacao"
+                     data-type="youtube"
+                     data-title="Vídeo: Bastidores e Dinâmicas de Grupo"
+                     data-src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+                     onclick="openLightbox(this)">
+                    <img src="https://placehold.co/800x600/3742fa/ffffff?text=Capa+do+Video+2+(Clique+para+Assistir)" 
+                         alt="Vídeo de Bastidores" 
+                         class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-slate-900/40 group-hover:bg-slate-900/50 transition-colors flex items-center justify-center">
+                        <div class="w-16 h-16 rounded-full bg-[#ffa502] text-white flex items-center justify-center text-2xl shadow-2xl group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-play ml-1"></i>
+                        </div>
+                    </div>
+                    <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-900/90 to-transparent p-6">
+                        <span class="text-xs font-bold uppercase tracking-wider text-[#00d2d3] mb-1">Vídeo em Ação</span>
+                        <h3 class="font-display font-bold text-white text-lg">Dinâmicas & Eventos</h3>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 4. SEÇÃO HABILIDADES -->
+        <section id="habilidades" class="reveal scroll-mt-24">
+            <div class="bg-white rounded-3xl p-8 sm:p-12 shadow-xl shadow-slate-200/60 border border-slate-100 text-center">
+                <span class="inline-block text-xs font-display font-extrabold uppercase tracking-wider text-[#ffa502] bg-[#ffa502]/15 px-3.5 py-1.5 rounded-full mb-3">
+                    Competências
+                </span>
+                <h2 class="font-display font-extrabold text-3xl sm:text-4xl text-slate-900 mb-4">
+                    Habilidades
+                </h2>
+                
+                <!-- TEXTO ORIGINAL MANTIDO EXATAMENTE COMO REFERÊNCIA -->
+                <p class="text-slate-600 max-w-2xl mx-auto mb-8 text-base sm:text-lg">
+                    Animação de grupos, Comunicação assertiva, Trabalho em equipe, Gestão de fluxo de pessoas, Resolução de problemas e Noções de Marketing Digital.
+                </p>
+
+                <!-- Pílulas / Tags Coloridas e Interativas -->
+                <div class="flex flex-wrap justify-center gap-3 sm:gap-4 max-w-4xl mx-auto">
+                    <span class="inline-flex items-center gap-2.5 px-5 py-3 rounded-2xl font-display font-bold text-sm sm:text-base bg-[#ff4757]/10 text-[#ff4757] hover:bg-[#ff4757] hover:text-white transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg cursor-default">
+                        <i class="fa-solid fa-face-laugh-beam"></i>
+                        Animação de grupos
+                    </span>
+
+                    <span class="inline-flex items-center gap-2.5 px-5 py-3 rounded-2xl font-display font-bold text-sm sm:text-base bg-[#5f27cd]/10 text-[#5f27cd] hover:bg-[#5f27cd] hover:text-white transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg cursor-default">
+                        <i class="fa-solid fa-comments"></i>
+                        Comunicação assertiva
+                    </span>
+
+                    <span class="inline-flex items-center gap-2.5 px-5 py-3 rounded-2xl font-display font-bold text-sm sm:text-base bg-[#00d2d3]/15 text-[#008b8c] hover:bg-[#00d2d3] hover:text-white transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg cursor-default">
+                        <i class="fa-solid fa-people-group"></i>
+                        Trabalho em equipe
+                    </span>
+
+                    <span class="inline-flex items-center gap-2.5 px-5 py-3 rounded-2xl font-display font-bold text-sm sm:text-base bg-[#ffa502]/15 text-[#d98a00] hover:bg-[#ffa502] hover:text-white transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg cursor-default">
+                        <i class="fa-solid fa-route"></i>
+                        Gestão de fluxo de pessoas
+                    </span>
+
+                    <span class="inline-flex items-center gap-2.5 px-5 py-3 rounded-2xl font-display font-bold text-sm sm:text-base bg-emerald-500/10 text-emerald-700 hover:bg-emerald-500 hover:text-white transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg cursor-default">
+                        <i class="fa-solid fa-lightbulb"></i>
+                        Resolução de problemas
+                    </span>
+
+                    <span class="inline-flex items-center gap-2.5 px-5 py-3 rounded-2xl font-display font-bold text-sm sm:text-base bg-pink-500/10 text-pink-600 hover:bg-pink-500 hover:text-white transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg cursor-default">
+                        <i class="fa-solid fa-hashtag"></i>
+                        Noções de Marketing Digital
+                    </span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. SEÇÃO CONTATO (CALL-TO-ACTION VIBRANTE) -->
+        <section id="contato" class="reveal scroll-mt-24 pb-8">
+            <div class="relative rounded-3xl hero-gradient p-8 sm:p-14 text-white shadow-2xl overflow-hidden">
+                <!-- Círculos decorativos -->
+                <div class="absolute -top-20 -right-20 w-64 h-64 rounded-full bg-white/10 pointer-events-none"></div>
+                <div class="absolute -bottom-20 -left-20 w-64 h-64 rounded-full bg-slate-900/15 pointer-events-none"></div>
+
+                <div class="relative z-10 max-w-4xl mx-auto text-center">
+                    <span class="inline-block bg-white/20 backdrop-blur-md px-4 py-1.5 rounded-full text-xs font-display font-bold uppercase tracking-wider mb-4">
+                        Vamos fazer seu evento acontecer!
+                    </span>
+                    <h2 class="font-display font-black text-3xl sm:text-5xl mb-4">
+                        Pronto para levar mais energia ao seu evento?
+                    </h2>
+                    <p class="text-white/90 text-lg mb-10 max-w-2xl mx-auto">
+                        Entre em contato diretamente pelo WhatsApp ou e-mail para orçamentos, ativações de marca, feiras, buffets e eventos corporativos.
+                    </p>
+
+                    <!-- Cards / Botões de Contato -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-left">
+                        
+                        <!-- Botão WhatsApp -->
+                        <a href="https://wa.me/5511998561906?text=Ol%C3%A1%20Hiapo!%20Gostaria%20de%20falar%20com%20voc%C3%AA%20sobre%20um%20evento." 
+                           target="_blank" 
+                           rel="noopener noreferrer"
+                           class="group bg-white text-slate-900 p-6 rounded-2xl shadow-xl hover:shadow-2xl transition-all transform hover:-translate-y-1 flex flex-col justify-between">
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="w-12 h-12 rounded-xl bg-[#25D366] text-white flex items-center justify-center text-2xl shadow-md">
+                                    <i class="fa-brands fa-whatsapp"></i>
+                                </div>
+                                <span class="text-xs font-bold text-[#25D366] bg-[#25D366]/10 px-2.5 py-1 rounded-full">Resposta Rápida</span>
+                            </div>
+                            <div>
+                                <p class="text-xs font-bold uppercase text-slate-400 mb-1">WhatsApp / 08:49 24/11/202608:49 24/11/2026</p>
+                                <p class="font-display font-extrabold text-lg text-slate-900 group-hover:text-[#25D366] transition-colors">
+                                    (11) 99856-1906
+                                </p>
+                            </div>
+                        </a>
+
+                        <!-- Botão E-mail (Corrigido com 'y': rodrigueshiapo@gmail.com) -->
+                        <div class="group bg-white text-slate-900 p-6 rounded-2xl shadow-xl hover:shadow-2xl transition-all transform hover:-translate-y-1 flex flex-col justify-between">
+                            <div class="flex items-center justify-between mb-4">
+                                <a href="mailto:rodrigueshiapo@gmail.com" class="w-12 h-12 rounded-xl bg-[#ff4757] text-white flex items-center justify-center text-xl shadow-md">
+                                    <i class="fa-solid fa-envelope"></i>
+                                </a>
+                                <button onclick="copyEmail()" class="text-xs font-bold text-slate-600 hover:text-[#ff4757] bg-slate-100 px-2.5 py-1 rounded-full transition-colors" title="Copiar E-mail">
+                                    <i class="fa-regular fa-copy mr-1"></i>Copiar
+                                </button>
+                            </div>
+                            <div>
+                                <p class="text-xs font-bold uppercase text-slate-400 mb-1">E-mail Profissional</p>
+                                <a href="mailto:rodrigueshiapo@gmail.com" class="font-display font-extrabold text-sm sm:text-base text-slate-900 hover:text-[#ff4757] break-all transition-colors">
+                                    rodrigueshiapo@gmail.com
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Card Localização -->
+                        <div class="bg-white/15 backdrop-blur-md border border-white/25 text-white p-6 rounded-2xl flex flex-col justify-between">
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="w-12 h-12 rounded-xl bg-white text-[#5f27cd] flex items-center justify-center text-xl shadow-md">
+                                    <i class="fa-solid fa-location-dot"></i>
+                                </div>
+                                <span class="text-xs font-bold bg-white/20 px-2.5 py-1 rounded-full">Base</span>
+                            </div>
+                            <div>
+                                <p class="text-xs font-bold uppercase text-white/75 mb-1">Localização</p>
+                                <p class="font-display font-extrabold text-lg">
+                                    Vila Romero, São Paulo - SP
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="bg-slate-900 text-slate-400 py-8 text-center text-sm">
+        <div class="max-w-6xl mx-auto px-4">
+            <p class="font-display font-bold text-white text-base mb-1">Hiapo Nunes Rodrigues</p>
+            <p>Recreador, Animador e Promotor de Eventos • Vila Romero, São Paulo - SP</p>
+        </div>
+    </footer>
+
+    <!-- ==================== BOTÃO FLUTUANTE WHATSAPP ==================== -->
+    <a href="https://wa.me/5511998561906?text=Ol%C3%A1%20Hiapo!%20Vi%20seu%20portf%C3%B3lio%20e%20gostaria%20de%20conversar." 
+       target="_blank" 
+       rel="noopener noreferrer"
+       aria-label="Falar no WhatsApp"
+       class="fixed bottom-6 right-6 z-40 w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-[#25D366] text-white flex items-center justify-center text-3xl shadow-2xl whatsapp-pulse hover:scale-110 transition-transform">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <!-- ==================== MODAL: GRANDES EVENTOS ==================== -->
+    <div id="events-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-slate-900/75 backdrop-blur-sm opacity-0 transition-opacity duration-300">
+        <div class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl transform scale-95 transition-transform duration-300 relative" id="events-modal-content">
+            <button onclick="closeEventsModal()" class="absolute top-5 right-5 w-9 h-9 rounded-full bg-slate-100 hover:bg-[#ff4757] hover:text-white text-slate-600 flex items-center justify-center transition-colors">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-[#5f27cd] to-[#ff4757] text-white flex items-center justify-center text-xl mb-4 shadow-md">
+                <i class="fa-solid fa-star"></i>
+            </div>
+
+            <h3 class="font-display font-extrabold text-2xl text-slate-900 mb-2">
+                Atuação em Grandes Eventos
+            </h3>
+            <p class="text-slate-600 text-sm mb-6">
+                Experiência prática em eventos de alta demanda, fluxo intenso de público e ativações de grandes marcas:
+            </p>
+
+            <div class="space-y-4">
+                <div class="p-4 rounded-2xl bg-slate-50 border border-slate-100 flex items-start gap-3.5">
+                    <span class="w-8 h-8 rounded-lg bg-[#ff4757]/15 text-[#ff4757] flex items-center justify-center flex-shrink-0 mt-0.5">
+                        <i class="fa-solid fa-music"></i>
+                    </span>
+                    <div>
+                        <h4 class="font-display font-bold text-slate-900">The Town</h4>
+                        <p class="text-xs sm:text-sm text-slate-600">Atuação dinâmica em festival de música de grande porte, garantindo engajamento e suporte ao público.</p>
+                    </div>
+                </div>
+
+                <div class="p-4 rounded-2xl bg-slate-50 border border-slate-100 flex items-start gap-3.5">
+                    <span class="w-8 h-8 rounded-lg bg-[#ffa502]/20 text-[#d98a00] flex items-center justify-center flex-shrink-0 mt-0.5">
+                        <i class="fa-solid fa-store"></i>
+                    </span>
+                    <div>
+                        <h4 class="font-display font-bold text-slate-900">Expo ABF (Franchising)</h4>
+                        <p class="text-xs sm:text-sm text-slate-600">Ativação de marca e personificação de mascotes em uma das maiores feiras de negócios e franquias.</p>
+                    </div>
+                </div>
+
+                <div class="p-4 rounded-2xl bg-slate-50 border border-slate-100 flex items-start gap-3.5">
+                    <span class="w-8 h-8 rounded-lg bg-[#00d2d3]/20 text-[#008b8c] flex items-center justify-center flex-shrink-0 mt-0.5">
+                        <i class="fa-solid fa-mask"></i>
+                    </span>
+                    <div>
+                        <h4 class="font-display font-bold text-slate-900">Carnaval & Formaturas</h4>
+                        <p class="text-xs sm:text-sm text-slate-600">Coordenação, animação, gestão de fluxo e suporte operacional com foco total na experiência e segurança.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-slate-100 flex justify-end">
+                <button onclick="closeEventsModal()" class="bg-slate-900 hover:bg-[#5f27cd] text-white font-display font-bold text-sm px-6 py-2.5 rounded-xl transition-colors">
+                    Fechar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== LIGHTBOX MODAL (GALERIA) ==================== -->
+    <div id="lightbox-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-slate-950/90 backdrop-blur-md">
+        <button onclick="closeLightbox()" class="absolute top-5 right-5 w-11 h-11 rounded-full bg-white/15 hover:bg-[#ff4757] text-white flex items-center justify-center text-xl transition-colors z-10">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+
+        <div class="max-w-4xl w-full flex flex-col items-center">
+            <div id="lightbox-media-container" class="w-full rounded-2xl overflow-hidden shadow-2xl bg-black flex items-center justify-center">
+                <!-- Conteúdo injetado via JS (Imagem, YouTube ou MP4) -->
+            </div>
+            <p id="lightbox-caption" class="font-display font-bold text-white text-lg sm:text-xl mt-4 text-center"></p>
+        </div>
+    </div>
+
+    <!-- ==================== NOTIFICAÇÃO TOAST (CÓPIA DE E-MAIL) ==================== -->
+    <div id="toast" class="fixed bottom-24 right-6 z-50 bg-slate-900 text-white px-5 py-3 rounded-2xl shadow-xl font-medium text-sm flex items-center gap-2.5 transform translate-y-10 opacity-0 pointer-events-none transition-all duration-300">
+        <i class="fa-solid fa-circle-check text-[#00d2d3]"></i>
+        <span>E-mail copiado: rodrigueshiapo@gmail.com</span>
+    </div>
+
+    <!-- ==================== JAVASCRIPT ==================== -->
+    <script>
+        // 1. Animação de entrada suave ao rolar a página (Intersection Observer)
+        document.addEventListener('DOMContentLoaded', () => {
+            const reveals = document.querySelectorAll('.reveal');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, {
+                threshold: 0.12
+            });
+
+            reveals.forEach(el => observer.observe(el));
+        });
+
+        // 2. Filtro da Galeria de Fotos & Vídeos
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const galleryItems = document.querySelectorAll('.gallery-item');
+
+        filterButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Atualiza estilo do botão ativo
+                filterButtons.forEach(b => {
+                    b.classList.remove('active', 'bg-slate-900', 'text-white', 'shadow-md');
+                    b.classList.add('bg-white', 'text-slate-600');
+                });
+                btn.classList.add('active', 'bg-slate-900', 'text-white', 'shadow-md');
+                btn.classList.remove('bg-white', 'text-slate-600');
+
+                const filterValue = btn.getAttribute('data-filter');
+
+                galleryItems.forEach(item => {
+                    const categories = item.getAttribute('data-category');
+                    if (filterValue === 'all' || categories.includes(filterValue)) {
+                        item.style.display = 'block';
+                        setTimeout(() => {
+                            item.style.opacity = '1';
+                            item.style.transform = 'scale(1)';
+                        }, 30);
+                    } else {
+                        item.style.opacity = '0';
+                        item.style.transform = 'scale(0.95)';
+                        setTimeout(() => {
+                            item.style.display = 'none';
+                        }, 250);
+                    }
+                });
+            });
+        });
+
+        // 3. Lightbox Modal para visualizar Fotos e Vídeos em tela cheia
+        const lightboxModal = document.getElementById('lightbox-modal');
+        const lightboxMediaContainer = document.getElementById('lightbox-media-container');
+        const lightboxCaption = document.getElementById('lightbox-caption');
+
+        function openLightbox(element) {
+            const type = element.getAttribute('data-type');
+            const src = element.getAttribute('data-src');
+            const title = element.getAttribute('data-title');
+
+            lightboxMediaContainer.innerHTML = '';
+            lightboxCaption.textContent = title || '';
+
+            if (type === 'image') {
+                const img = document.createElement('img');
+                img.src = src;
+                img.alt = title;
+                img.className = 'max-h-[78vh] w-auto object-contain';
+                lightboxMediaContainer.appendChild(img);
+            } else if (type === 'youtube') {
+                const iframe = document.createElement('iframe');
+                iframe.src = src + '?autoplay=1';
+                iframe.className = 'w-full aspect-video max-h-[78vh]';
+                iframe.setAttribute('frameborder', '0');
+                iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
+                iframe.setAttribute('allowfullscreen', 'true');
+                lightboxMediaContainer.appendChild(iframe);
+            } else if (type === 'mp4') {
+                const video = document.createElement('video');
+                video.src = src;
+                video.controls = true;
+                video.autoplay = true;
+                video.className = 'max-h-[78vh] w-full';
+                lightboxMediaContainer.appendChild(video);
+            }
+
+            lightboxModal.classList.remove('hidden');
+            lightboxModal.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            lightboxModal.classList.add('hidden');
+            lightboxModal.classList.remove('flex');
+            lightboxMediaContainer.innerHTML = ''; // Para o vídeo ao fechar
+            document.body.style.overflow = '';
+        }
+
+        // Fechar Lightbox ao clicar fora da mídia
+        lightboxModal.addEventListener('click', (e) => {
+            if (e.target === lightboxModal) {
+                closeLightbox();
+            }
+        });
+
+        // 4. Modal de Grandes Eventos
+        const eventsModal = document.getElementById('events-modal');
+        const eventsModalContent = document.getElementById('events-modal-content');
+
+        function openEventsModal() {
+            eventsModal.classList.remove('hidden');
+            eventsModal.classList.add('flex');
+            setTimeout(() => {
+                eventsModal.classList.remove('opacity-0');
+                eventsModalContent.classList.remove('scale-95');
+                eventsModalContent.classList.add('scale-100');
+            }, 10);
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeEventsModal() {
+            eventsModal.classList.add('opacity-0');
+            eventsModalContent.classList.remove('scale-100');
+            eventsModalContent.classList.add('scale-95');
+            setTimeout(() => {
+                eventsModal.classList.add('hidden');
+                eventsModal.classList.remove('flex');
+                document.body.style.overflow = '';
+            }, 250);
+        }
+
+        eventsModal.addEventListener('click', (e) => {
+            if (e.target === eventsModal) {
+                closeEventsModal();
+            }
+        });
+
+        // Fechar modais com a tecla ESC
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeLightbox();
+                closeEventsModal();
+            }
+        });
+
+        // 5. Função para copiar e-mail (usando execCommand para compatibilidade total)
+        function copyEmail() {
+            const email = 'rodrigueshiapo@gmail.com';
+            const tempInput = document.createElement('input');
+            tempInput.value = email;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+
+            const toast = document.getElementById('toast');
+            toast.classList.remove('translate-y-10', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-10', 'opacity-0');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
